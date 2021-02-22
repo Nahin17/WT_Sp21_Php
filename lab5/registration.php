@@ -1,29 +1,45 @@
+
+
+
+
+
 <?php
      $name="";
 	 $err_name="";
+
      $uname="";
 	 $err_uname="";
+
 	 $pass="";
 	 $err_pass="";
+
 	 $cpass="";
 	 $err_cpass="";
+
 	 $email="";
 	 $err_email="";
+
 	 $phone="";
 	 $err_phone="";
+
 	 $address="";
 	 $err_address="";
+
 	 $bdate="";
 	 $err_bdate="";
+
 	 $gender="";
 	 $err_gender="";
-     $wdyhau="";
-	 $err_wdyhau="";
+
+     $wdu="";
+	 $err_wdu="";
+
 	 $bio="";
 	 $err_bio="";
 		 
      if($_SERVER["REQUEST_METHOD"]=="POST")
 	 {
+
 		     if(empty($_POST["name"])){
 				 $err_name="Name Required";
 			 }
@@ -33,6 +49,10 @@
 			 else{
 				 $name=$_POST["name"];
 			 }
+
+
+
+
 			 if(empty($_POST["uname"])){
 				 $err_uname="Username Required";
 			 }
@@ -48,6 +68,13 @@
 			 else{
 				 $uname=$_POST["uname"];
 			 }
+
+
+
+
+
+
+
 			 if(empty($_POST["pass"])){
 				 $err_pass="Password Required";
 			 }
@@ -64,121 +91,254 @@
 			 else{
 				 $pass=$_POST["pass"];
 			 }
+
+
+
+
+
+
+
 			 if(empty($_POST["cpass"])){
 				 $err_cpass="Confirm Your Password";
 			 }
 			 else{
 				 $cpass=$_POST["cpass"];
 			 }
+
+
+
+
+
+
 			  if (empty($_POST["email"])) {
                  $err_email = "Email is required";
-             } 
-			 else {
-                 $email =$err_email($_POST["email"]);
              }
+             elseif(strpos($_POST["email"],"@.")){
+			     $err_email="[Email must contain @ and at least one dot after @]";
+		     }			 
+			
+			 else {
+                 $email =$_POST["email"];
+             }
+
+
+
+
+
 			 if(empty($_POST["phone"])){
 				 $err_phone="Insert Your Phone Number";
 			 }
 			 else{
 				 $phone=$_POST["phone"];
 			 }
+
+
+
 			  if(empty($_address["address"])){
 				 $err_address="Select Your Address";
 			 }
 			 else{
 				 $address=$_POST["address"];
 			 }
-			  if(empty($_POST["profession"])){
-				 $err_profession="Confirm Your Profession";
+              
+
+
+			  if(empty($_address["bdate"])){
+				 $err_bdate="Select Your Birth date";
 			 }
 			 else{
-				 $profession=$_POST["profession"];
+				 $bdate=$_POST["bdate"];
 			 }
+              
+
+
+
+			  if(empty($_gender["gender"])){
+				 $err_gender="Select Your gender";
+			 }
+			 else{
+				 $gender=$_POST["gender"];
+			 }
+              
+
+
+
+			  if(empty($_wdu["wdu"])){
+				 $err_wdu="Select Your Where did you hear about us?";
+			 }
+			 else{
+				 $wdu=$_POST["wdu"];
+			 }
+              
+
+
+
+			
+
+
+
 			 if(empty($_POST["bio"])){
 				 $err_bio="Bio Required";
 			 }
 			 else{
 				 $bio=$_POST["bio"];
 			 }
-		 } 
+}
+
 ?>
 
+<!DOCTYPE html>
 <html>
-     <head></head>
-	 <body>
-	      <fieldset>
-              <legend><h1>Club Member Registration</h1></legend>
-		       <form action="" method="post">
-		       <table>
-			         <tr>
-					    <td><span>Name</span></td>
-						<td>:<input type="text" name="name" value="<?php echo $name;?>" placeholder="Name">
-						<span><?php echo $err_name;?></span></td>
-					</tr>
-			        <tr>
-					    <td><span>Username</span></td>
-						<td>:<input type="text" name="uname" value="<?php echo $uname;?>" placeholder="Username">
-						<span><?php echo $err_uname;?></span></td>
-					</tr>
-					<tr>
-					    <td><span>Password</span></td>
-						<td>:<input type="password" value="<?php echo $pass;?>" name="pass">
-						<span><?php echo $err_pass;?></span></td>
-					</tr>
-					<tr>
-					    <td><span>Confirm Password</span></td>
-						<td>:<input type="password" value="<?php echo $cpass;?>" name="cpass">
-						<span><?php echo $err_cpass;?></span></td>
-					</tr>
-					<tr>
-					    <td><span>Email</span></td>
-						<td>:<input type="text" value="<?php echo $email;?>" name="email">
-						<span><?php echo $err_email;?></span></td>
-					</tr>
-					<tr>
-					    <td><span>Phone</span></td>
-						<td>:<input type="text" value="<?php echo $phone;?>" name="phone">
-						<span><?php echo $err_phone;?></span></td>
-					</tr>
-					<tr>
-					    <td><span>Address</span></td>
-						<td>:<input type="text" name="sa" placeholder="Street Address" size="12"<br>
-					         <input type="text" name="city" placeholder="City" size="6">-<input type="text" name="state" placeholder="State" size="6"><br>
-							 <input type="text" name="postal/zipcode" placeholder="Postal/Zip Code" size="12">
-						</td> 
-					</tr>
-					<tr>
-					    <td><span>Birth Date</span></td>
-						<td>:<select name="day">
-						<option disabled selected>Day</option>
-						<?php
-						     for($i=1;$i<=31;$i++){
-								 echo "<option>$i</option>";
-							 }
-						?>
-						</td>
-						<td><select name="month">
-						<option disabled selected>Month</option>
-						<?php
-						    $month=array("January","February","March","April","May","June","July","August","September","October","November","December");
-							echo "$month[]";
-						?>
-						</td>
-						<td>:<select name="year">
-						<option disabled selected>Year</option>
-						<?php
-						     for($i=1985;$i<=2002;$i++){
-								 echo "<option>$i</option>";
-							 }
-						?>
-						</td>
-					</tr>
-					<tr>
+<head>
+	<title>  Club Member Registration </title>
+</head>
+<body>
+	<fieldset>
+		<legend>Club Member Registration</legend>
+	
+	<h1>Club Member Registration </h1>
+
+	<form action="" method = "post">
+		
+           <table>
+           	<tr>
+           		<td><span>Name</span></td>
+           		<td>:<input type="text" name="name" value = "<?php echo $name;?>" placeholder= "Name" <span> <?php $err_name; ?> </span>
+                  
+           		 </td>
+           		</tr>
+           
+        
+
+
+          <tr>
+          	<td><span>User Name</span></td>
+           	<td>:<input type="text" name="uname" value = "<?php echo $uname;?>" 
+           	placeholder= "User Name" <span> <?php $err_uname; ?> </span>
+           </td>
+          	
+         </tr>
+
+
+
+
+         <tr>
+         	<td> <span>Password</span> </td>
+         	<td>: <input type="text" name ="pass" value= "<?php echo $pass;?>"
+             placeholder ="Password" <span> <?php $err_pass; ?> </td> </span>
+         	   </td>
+         </tr>
+
+
+
+
+
+         <tr>
+         	<td> <span>Confirm Password </span>  </td>
+         	<td>: <input type="text" name="cpass" value="<?php echo $cpass;?>"
+            placeholder ="Confirm Password" <span> <?php $err_cpass; ?> </span>
+        </td>
+
+        </tr>
+
+
+
+
+
+        <tr>
+        	<td> <span> Email </span> </td>
+        	<td>: <input type ="text" name= "email" value="<?php echo $email; ?>"
+           placeholder = " Email " <span> <?php $err_email; ?> </span> <br> 
+           </td>
+        	  
+        </tr>
+
+
+
+       <tr>
+        	<td> <span> Phone </span> </td>
+        	<td>: <input type="number" name="phone" value="<?php echo $phone;?>"
+        		
+        	placeholder="Number" <span> <?php $err_phone ;?> </span>
+        	- <input type="number" name="code" value="<?php echo $phone;?>"
+        		
+        	placeholder="Code" <span> <?php $err_phone ;?> </span> <br> <br>
+        	
+        </td>
+
+    
+ 
+        <tr>
+
+
+        	<td> <span> Address </span> </td>
+        	<td>:  <input type ="text" name= "address " value="<?php echo $address; ?>"
+           placeholder = " Street Address " <span> <?php $err_address; ?> </span>  <br>
+           
+            <input type ="text" name= "city" value="<?php echo $address; ?>"
+           placeholder = " City" <span> <?php $err_address; ?> </span> 
+
+          - <input type ="text" name= "State" value="<?php echo $address; ?>"
+           placeholder = " State" <span> <?php $err_address; ?> </span> 
+
+            <input type ="number" name= "code" value="<?php echo $address; ?>"
+           placeholder = " Postal/Zip Code " <span> <?php $err_address; ?> </span> 
+
+        </td>	  
+        </tr>
+
+
+
+        <tr>
+        	<td> <span> Birthday</span></td>
+        	<td>: <select name = "day">
+        		<option disabled selected>Day</option>
+        		<?php 
+        		for($i=1; $i<=31; $i++)
+        		{
+        			echo "<option> $i </option>";
+        		}
+        		?>
+        	</select>
+
+        	
+
+        	 <select name= "month">
+            <option disabled selected > Month </option>
+            <?php
+                 $month= array("January", "February","March","April", "May", "June", "July", "Auguest", "Septermber", "October", "November", "December");
+
+                 for($a=0; $a<count($month);$a++)
+                 {
+                 echo "<option> $month[$a] </option> ";
+                 
+                }
+           ?>
+       </select>
+
+       <select name="Year">
+       	<option disabled selected> Year</option>
+       	<?php 
+       	for($j=1985; $j<=2002; $j++)
+       	{
+       		echo "<option> $j </option>";
+       	}
+       	?>
+       	
+       </select>
+        </td>
+        </tr>
+
+
+
+
+
+        <tr>
 					    <td><span>Gender</span></td>
 						<td>:<input type="radio" name="gender" value="Male"><span>Male</span>
 						<input type="radio" name="gender" value="Female">Female<br>
 						<span><?php echo $err_gender;?></span></td>
-					</tr>
+		</tr>
 					<tr>
 					    <td><span>Where did you hear about us?</span></td>
 						<td>
@@ -187,10 +347,9 @@
 						         <option>A Friend or Colleague</option>
 								 <option>Google</option>
 								 <option>Blog Post</option>
-								 <option>Blog Post</option>
 								 <option>News Article</option>
 							</select>
-							<span><?php echo $err_wdyhau;?></span></td>
+							<span><?php echo $err_wdu;?></span></td>
 						</td>
 					</tr>
 					<tr>
@@ -203,4 +362,10 @@
 					</tr>
 			  </table>
 		</form>
-	</fieldset>
+	
+
+
+</fieldset>
+
+</body>
+</html>
