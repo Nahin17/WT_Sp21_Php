@@ -75,35 +75,45 @@
 
 
 
-			 if(empty($_POST["pass"])){
+			if(empty($_POST["pass"])){
 				 $err_pass="Password Required";
-			 }
-			 elseif(strlen($_POST["pass"])<8){
-				 $err_pass="Password Must Be 8 Charachter Long";
 			 }
 			 elseif(isset($_POST[""])){
 		         echo htmlspecialchars($_POST["pass"]);
-				 echo ctype_upper("");
-				 echo ctype_lower("");
-				 echo number_format("");
-
 		     }
+			 elseif(strlen($_POST["pass"])<8){
+				 $err_pass="Password Must Be 8 Charachter Long";
+			 }
+			 elseif(!strpos($_POST["pass"],"#")){
+			     $err_pass="[Password should contain special character]";
+		     }
+		     elseif(!is_numeric($_POST["pass"])){
+			     $err_pass="[Password should contain Numeric values]";
+		     }
+		     elseif(!ctype_upper($_POST["pass"])){
+			     $err_pass="[Password should contain UpperCase values]";
+		     }
+		     elseif(!ctype_lower($_POST["pass"])){
+			     $err_pass="[Password should contain LowerCase values]";
+		     }
+		     elseif(strpos($_POST["pass"]," ")){
+			     $err_pass="[Password should not contain white space]";
+		     }
+
 			 else{
 				 $pass=$_POST["pass"];
 			 }
 
-
-
-
-
-
-
-			 if(empty($_POST["cpass"])){
+             if(empty($_POST["confirm pass"])){
 				 $err_cpass="Confirm Your Password";
 			 }
 			 else{
-				 $cpass=$_POST["cpass"];
+				 $cpass=$_POST["confirm pass"];
 			 }
+			 
+
+
+
 
 
 
@@ -224,7 +234,7 @@
 
          <tr>
          	<td> <span>Password</span> </td>
-         	<td>: <input type="text" name ="pass" value= "<?php echo $pass;?>"
+         	<td>: <input type="password" name ="pass" value= "<?php echo $pass;?>"
              placeholder ="Password" <span> <?php $err_pass; ?> </td> </span>
          	   </td>
          </tr>
@@ -235,7 +245,7 @@
 
          <tr>
          	<td> <span>Confirm Password </span>  </td>
-         	<td>: <input type="text" name="cpass" value="<?php echo $cpass;?>"
+         	<td>: <input type="password" name="cpass" value="<?php echo $cpass;?>"
             placeholder ="Confirm Password" <span> <?php $err_cpass; ?> </span>
         </td>
 
